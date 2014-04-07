@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/laodouya/schema-parser'
+let g:netrw_dirhist_2='/etc'
+let g:netrw_dirhist_3='/home/laodouya/test'
+let g:netrw_dirhist_4='/home/laodouya/Ubuntu One/Shared With Me'
+let g:netrw_dirhist_5='/var/www/Paomianba/src/include'
+let g:netrw_dirhist_6='/var/www/Paomianba/log/include'
+let g:netrw_dirhist_7='/var/www/Paomianba/src/include'
