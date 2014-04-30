@@ -7,7 +7,7 @@ $items=$mem->getExtendedStats('items');
 $items=$items["$host:$port"]['items'];
 foreach($items as $key=>$values)
 {
-    $number=$key;;
+    $number=$key;
     $str=$mem->getExtendedStats ("cachedump",$number,0);
     $line=$str["$host:$port"];
     if( is_array($line) && count($line)>0)
