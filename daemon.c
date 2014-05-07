@@ -45,14 +45,21 @@ void make_it_daemon()
     signal(SIGTERM, sigterm_handler); //第八步
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    if (argc<3)
+    {
+        printf("Usage: daemon program_full_path parameter\n");
+        return 1;
+    }
+    
+    make_it_daemon();
+    
     int status;
     pid_t pid;
-    make_it_daemon();
+    
     while( _running )
     {
-        //TODO if server.js is not running
         pid = fork();
         if (pid<0)
         {
@@ -61,9 +68,9 @@ int main()
         }
         else if (0==pid)
         {
-            int ret = execl("/usr/bin/node","node","/var/www/Paomianba/src/plugin/replit/server.js",NULL);
+            int ret = execl(argv[1],argv[1],argv[2],NULL);
             if (ret<0)
-                perror("execl server.js");
+                perror("execl");
             exit(1);
         }
 
