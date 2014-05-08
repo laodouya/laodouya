@@ -41,6 +41,9 @@ endfunction
 
 map <F8> :call ToggleNERDTreeAndTagbar('toggle')<CR>
 
+"switch paste mode
+set pastetoggle=<F9>
+
 "auto toggle NerdTree and Tagbar when open specified filetype
 au FileType cpp,c,h call ToggleNERDTreeAndTagbar('open')
 
