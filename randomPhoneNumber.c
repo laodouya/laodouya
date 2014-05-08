@@ -4,9 +4,9 @@
 int main()
 {
     long long billion = 1000000000;
-    long max = 100000;
+    long max = 3000;
     int header[]={13,15,18};
-    printf("Name, Phone Number\n");
+    printf("姓名,手机\n");
     long num = 0;
     srandom(time(NULL));
     for (int i = 0; i<3; i++)
