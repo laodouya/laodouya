@@ -34,7 +34,7 @@ fi
 
 #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\H\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
-PS1="\$([[ \$? != 0 ]] && echo \"\[\033[1;37m\][\[\033[1;31m\]X\[\033[1;37m\]]\")\[\033[1;31m\]\u@\H\[\033[1;36m\]:\[\033[1;35m\]\w \[\033[1;36m\]\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed \"s: ::g\")\[\033[1;33m\]> \[\033[0m\]"
+PS1="\$([[ \$? != 0 ]] && echo \"\[\033[1;37m\][\[\033[1;31m\]X\[\033[1;37m\]]\")\[\033[1;36m\]\u\[\033[1;32m\]@\[\033[1;34m\]\H\[\033[1;31m\]:\[\033[1;35m\]\w \[\033[1;36m\]\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed \"s: ::g\")\[\033[1;33m\]> \[\033[0m\]"
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -86,5 +86,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
+PATH=$PATH:$HOME/bin:/usr/local/texlive/2014/bin/x86_64-linux
+NODE_PATH=/usr/lib/node_modules/
+export PATH
+export NODE_PATH
 # TODO upload in github and vimrc .vim
