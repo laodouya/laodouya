@@ -1,7 +1,7 @@
 set shell=/bin/bash
 
 set nocompatible
-filetype on
+filetype off
 
 " set the runtime path to include Vundle and initialize
 " first run: git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -18,7 +18,10 @@ Plugin 'gmarik/Vundle.vim'
 " plugin on GitHub repo
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
+Plugin 'fatih/vim-go'
+Plugin 'bling/vim-airline'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
 "Plugin 'altercation/vim-colors-solarized'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -52,9 +55,64 @@ filetype plugin indent on    " required
 "NerdTree
 let NERDTreeChDirMode=2
 let NERDTreeDirArrows=0 "目录箭头 1 显示箭头  0传统+-|号
+
+function! ToggleNERDTree(stats)
+    let w:jumpbacktohere = 1
+
+    "Detect if open
+    if exists('t:NERDTreeBufName')
+        let nerdtree_open = bufwinnr(t:NERDTreeBufName) != -1
+    else
+        let nerdtree_open = 0
+    endif
+
+    "open NERDTree
+    if nerdtree_open
+        if 'toggle'==a:stats
+            NERDTreeClose
+        endif
+    else
+        NERDTree
+    endif
+
+    "Jump back to the original window
+    for window in range(1, winnr('$'))
+        execute window . 'wincmd w'
+        if exists('w:jumpbacktohere')
+            unlet w:jumpbacktohere
+            break
+        endif
+    endfor
+endfunction
+
+function! ToggleTagbar(stats)
+    let w:jumpbacktohere = 1
+
+    "Detect if open
+    let tagbar_open = bufwinnr('__Tagbar__') != -1
+
+    "open Tagbar
+    if tagbar_open
+        if 'toggle'==a:stats
+            TagbarClose
+        endif
+    else
+        TagbarOpen
+    endif
+
+    "Jump back to the original window
+    for window in range(1, winnr('$'))
+        execute window . 'wincmd w'
+        if exists('w:jumpbacktohere')
+            unlet w:jumpbacktohere
+            break
+        endif
+    endfor
+endfunction
+
 function! ToggleNERDTreeAndTagbar(stats)
     let w:jumpbacktohere = 1
-    
+
     "Detect which plugins are open
     if exists('t:NERDTreeBufName')
         let nerdtree_open = bufwinnr(t:NERDTreeBufName) != -1
@@ -73,7 +131,7 @@ function! ToggleNERDTreeAndTagbar(stats)
         TagbarOpen
     elseif tagbar_open
         NERDTree
-    else 
+    else
         NERDTree
         TagbarOpen
     endif
@@ -88,6 +146,8 @@ function! ToggleNERDTreeAndTagbar(stats)
     endfor
 endfunction
 
+map <F6> :call ToggleNERDTree('toggle')<CR>
+map <F7> :call ToggleTagbar('toggle')<CR>
 map <F8> :call ToggleNERDTreeAndTagbar('toggle')<CR>
 
 "switch paste mode
@@ -114,8 +174,8 @@ vnoremap <C-k> <C-W>k
 vnoremap <C-l> <C-W>l
 
 "mouse right click
-if has('mouse') 
-    set mouse-=a 
+if has('mouse')
+    set mouse-=a
 endif
 
 "set tab
@@ -198,3 +258,52 @@ nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_confirm_extra_conf=0    "打开vim时不再询问是否加载ycm_extra_conf.py配置
 let g:ycm_collect_identifiers_from_tag_files = 1 "使用ctags生成的tags文件
 
+
+augroup filetype
+    autocmd! BufRead,BufNewFile BUILD set filetype=blade
+augroup end
+
+"syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+
+"go setting
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }

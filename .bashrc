@@ -98,3 +98,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+export GOROOT=/usr/local/go
+export GOBIN=$GOROOT/bin
+export GOPATH=/home/laodouya/gopath
+export PATH=$PATH:$GOBIN:$GOPATH
