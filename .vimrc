@@ -273,7 +273,6 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 
 "go setting
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
