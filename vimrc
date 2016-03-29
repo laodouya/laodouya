@@ -1,7 +1,7 @@
 set shell=/bin/bash
 
 set nocompatible
-filetype off
+filetype off    " required
 
 " set the runtime path to include Vundle and initialize
 " first run: git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
