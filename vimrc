@@ -20,7 +20,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'fatih/vim-go'
 Plugin 'bling/vim-airline'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
 "Plugin 'altercation/vim-colors-solarized'
 
 " All of your Plugins must be added before the following line
@@ -140,8 +140,10 @@ map <F8> :call ToggleNERDTreeAndTagbar('toggle')<CR>
 "switch paste mode
 set pastetoggle=<F9>
 
+map <F10> :GoImports<CR>
+
 "auto toggle NerdTree and Tagbar when open specified filetype
-au FileType cpp,c,h call ToggleNERDTreeAndTagbar('open')
+"au FileType cpp,c,h call ToggleNERDTreeAndTagbar('open')
 "au FileType go call ToggleNERDTree('open')
 
 "close nerdtree when :q
@@ -261,6 +263,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:syntastic_python_checkers = ['pylint3']
 
 "go setting
 let g:go_highlight_functions = 1
@@ -269,9 +272,11 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
 let g:go_auto_type_info = 1
 let g:go_metalinter_autosave = 1
-"let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "guru"
 let g:go_list_type = "quickfix"
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',

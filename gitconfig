@@ -1,0 +1,10 @@
+[color]
+	ui = true
+[alias]
+	l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date-order
+	la = log --all --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date-order
+[user]
+	name = laodouya
+	email = laodouya@yeah.net
+[core]
+	excludesfile = /home/laodouya/.gitignore
