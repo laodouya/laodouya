@@ -3,7 +3,7 @@ function fish_prompt --description 'Write out the prompt'
 
 	# Just calculate this once, to save a few cycles when displaying the prompt
 	if not set -q __fish_prompt_hostname
-		set -g __fish_prompt_hostname (ifconfig | awk ' /inet /  { print $2 } '| cut -c8- | head -n1)
+		set -g __fish_prompt_hostname (ifconfig eth0| awk ' /inet /  { print $2 } '| cut -c1- | head -n1)
 	end
 
 	set -l normal (set_color normal)
@@ -88,4 +88,31 @@ function fish_prompt --description 'Write out the prompt'
 	end
 
 	echo -n -s (set_color $fish_color_user) "$USER" $normal @ (set_color $fish_color_host) "$__fish_prompt_hostname" $normal ':' (set_color $color_cwd) (my_pwd) (__fish_git_prompt) $normal $prompt_status "$mode_str" ' ' (set_color $fish_color_host) (/bin/ls -1 | /usr/bin/wc -l | /bin/sed "s: ::g") $normal "> "
+end
+
+function fish_right_prompt
+    if test $CMD_DURATION
+        # Show duration of the last command
+        set duration (echo "$CMD_DURATION 1000" | awk '{printf "%.3fs", $1 / $2}')
+        echo $duration
+
+#        # OS X notification when a command takes longer than notify_duration
+#        set notify_duration 10000
+#        set exclude_cmd "bash|less|man|more|ssh"
+#        if begin
+#                test $CMD_DURATION -gt $notify_duration
+#                and echo $history[1] | grep -vqE "^($exclude_cmd).*"
+#            end
+#
+#            # Only show the notification if iTerm is not focused
+#            echo "
+#                tell application \"System Events\"
+#                    set activeApp to name of first application process whose frontmost is true
+#                    if \"iTerm\" is not in activeApp then
+#                        display notification \"Finished in $duration\" with title \"$history[1]\"
+#                    end if
+#                end tell
+#                " | osascript
+#        end
+    end
 end
