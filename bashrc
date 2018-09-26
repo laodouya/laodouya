@@ -105,3 +105,5 @@ export GOROOT=/usr/local/go
 export GOBIN=$GOROOT/bin
 export GOPATH=/home/laodouya/gopath
 export PATH=$PATH:$GOBIN:$GOPATH
+
+export PIPENV_PYPI_MIRROR="http://mirrors.aliyun.com/pypi/simple/"
