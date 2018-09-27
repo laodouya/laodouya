@@ -237,8 +237,12 @@ set nowrap
 "set encodings for chinese
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
+scriptencoding utf-8
 set encoding=utf-8
 
+" display extra whitespaces
+set list
+set lcs=tab:>-,trail:-,nbsp:-
 
 "YouCompleteMe config
 let mapleader = ","  "这个leader就映射为逗号“，”
@@ -247,11 +251,6 @@ let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'   "配置默认的ycm_extra_
 nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_confirm_extra_conf=0    "打开vim时不再询问是否加载ycm_extra_conf.py配置
 let g:ycm_collect_identifiers_from_tag_files = 1 "使用ctags生成的tags文件
-
-
-augroup filetype
-    autocmd! BufRead,BufNewFile BUILD set filetype=blade
-augroup end
 
 "syntastic
 set statusline+=%#warningmsg#
@@ -263,7 +262,11 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:syntastic_python_checkers = ['pylint3']
+let g:syntastic_python_python_exec = 'python3'
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_pylint_args = '-E'
+
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 
 "go setting
 let g:go_highlight_functions = 1
