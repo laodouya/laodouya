@@ -15,6 +15,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+Plugin 'buoto/gotests-vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'fatih/vim-go'
@@ -143,7 +144,7 @@ set pastetoggle=<F9>
 map <F10> :GoImports<CR>
 
 "auto toggle NerdTree and Tagbar when open specified filetype
-"au FileType cpp,c,h call ToggleNERDTreeAndTagbar('open')
+au FileType cpp,c,h,go,py,sh call ToggleNERDTreeAndTagbar('open')
 "au FileType go call ToggleNERDTree('open')
 
 "close nerdtree when :q
@@ -210,6 +211,7 @@ endif
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
+set cursorline
 set showcmd		" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
 "set ignorecase		" Do case insensitive matching
@@ -241,8 +243,8 @@ scriptencoding utf-8
 set encoding=utf-8
 
 " display extra whitespaces
-set list
-set lcs=tab:>-,trail:-,nbsp:-
+" set list
+" set lcs=tab:>-,trail:-,nbsp:-
 
 "YouCompleteMe config
 let mapleader = ","  "这个leader就映射为逗号“，”
@@ -260,7 +262,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['pylint']
@@ -268,43 +269,25 @@ let g:syntastic_python_pylint_args = '-E'
 
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 
-"go setting
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
+"go highlight setting
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_arguments = 1
+let g:go_highlight_function_calls = 1
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
-let g:go_auto_type_info = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_string_spellcheck = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+
+"go setting
 let g:go_metalinter_autosave = 1
-let g:go_fmt_command = "guru"
-let g:go_list_type = "quickfix"
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-    \ }
+
