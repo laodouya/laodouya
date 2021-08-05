@@ -43,16 +43,7 @@ fi
 export IP
 
 
-PS1="\$([[ \$? != 0 ]] && echo \"\[\033[1;37m\][\[\033[1;31m\]X\[\033[1;37m\]]\")\[\033[1;36m\]\u\[\033[1;32m\]@\[\033[1;34m\]\$IP\[\033[1;31m\]:\[\033[1;35m\]\w \[\033[1;36m\]\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed \"s: ::g\")\[\033[1;33m\]> \[\033[0m\]"
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+PS1="\$([[ \$? != 0 ]] && echo \"\[\033[1;37m\][\[\033[1;31m\]X\[\033[1;37m\]]\")\[\033[1;36m\]\u\[\033[1;32m\]@\[\033[1;34m\]\h\[\033[1;31m\]:\[\033[1;35m\]\w \[\033[1;36m\]\$(/bin/ls -1 | /usr/bin/wc -l | /usr/bin/sed \"s: ::g\")\[\033[1;33m\]> \[\033[0m\]"
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then

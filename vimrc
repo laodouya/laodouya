@@ -18,10 +18,13 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'buoto/gotests-vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'fatih/vim-go'
 Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'godlygeek/tabular'
 "Plugin 'altercation/vim-colors-solarized'
 
 " All of your Plugins must be added before the following line
@@ -291,3 +294,8 @@ let g:go_highlight_variable_assignments = 1
 "go setting
 let g:go_metalinter_autosave = 1
 
+"vim-gitgutter
+set updatetime=100
+
+"nerdcommenter
+let g:NERDSpaceDelims = 1
