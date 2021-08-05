@@ -3,45 +3,31 @@ set shell=/bin/bash
 set nocompatible
 filetype off    " required
 
-" set the runtime path to include Vundle and initialize
-" first run: git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Specify a directory for plugins
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+" Make sure you use single quotes
+" On-demand loading
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/tagbar'
+Plug 'altercation/vim-colors-solarized'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'buoto/gotests-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-syntastic/syntastic'
+Plug 'godlygeek/tabular'
+" Plug 'ycm-core/YouCompleteMe'
 
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'buoto/gotests-vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'fatih/vim-go'
-Plugin 'bling/vim-airline'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'godlygeek/tabular'
-"Plugin 'altercation/vim-colors-solarized'
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+" Plug 'fatih/vim-go', { 'tag': '*' }
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" Initialize plugin system
+call plug#end()
+
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
 
 "NerdTree
 let NERDTreeChDirMode=2
@@ -270,7 +256,7 @@ let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_python_pylint_args = '-E'
 
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+let g:tagbar_ctags_bin='/opt/homebrew/bin/ctags'
 
 "go highlight setting
 let g:go_highlight_array_whitespace_error = 1
@@ -292,6 +278,8 @@ let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
 
 "go setting
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 let g:go_metalinter_autosave = 1
 
 "vim-gitgutter
