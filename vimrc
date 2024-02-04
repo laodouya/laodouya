@@ -10,15 +10,14 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 " On-demand loading
 Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'preservim/tagbar'
-Plug 'altercation/vim-colors-solarized'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'buoto/gotests-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-syntastic/syntastic'
 Plug 'godlygeek/tabular'
+" Plug 'vim-syntastic/syntastic'
 " Plug 'ycm-core/YouCompleteMe'
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
@@ -31,7 +30,7 @@ filetype plugin indent on    " required
 
 "NerdTree
 let NERDTreeChDirMode=2
-let NERDTreeDirArrows=0 "Ä¿Â¼¼ıÍ· 1 ÏÔÊ¾¼ıÍ·  0´«Í³+-|ºÅ
+let NERDTreeDirArrows=0 "ç›®å½•ç®­å¤´ 1 æ˜¾ç¤ºç®­å¤´  0ä¼ ç»Ÿ+-|å·
 
 function! ToggleNERDTree(stats)
     let w:jumpbacktohere = 1
@@ -182,12 +181,6 @@ set nu
 
 set ruler
 
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-syntax enable
-set background=dark
-"colorscheme solarized
-
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 syntax on
@@ -231,31 +224,6 @@ set termencoding=utf-8
 scriptencoding utf-8
 set encoding=utf-8
 
-" display extra whitespaces
-" set list
-" set lcs=tab:>-,trail:-,nbsp:-
-
-"YouCompleteMe config
-let mapleader = ","  "Õâ¸öleader¾ÍÓ³ÉäÎª¶ººÅ¡°£¬¡±
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'   "ÅäÖÃÄ¬ÈÏµÄycm_extra_conf.py
-"°´,d »áÌø×ªµ½¶¨Òå
-nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:ycm_confirm_extra_conf=0    "´ò¿ªvimÊ±²»ÔÙÑ¯ÎÊÊÇ·ñ¼ÓÔØycm_extra_conf.pyÅäÖÃ
-let g:ycm_collect_identifiers_from_tag_files = 1 "Ê¹ÓÃctagsÉú³ÉµÄtagsÎÄ¼ş
-
-"syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:syntastic_python_python_exec = 'python3'
-let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_python_pylint_args = '-E'
-
 let g:tagbar_ctags_bin='/opt/homebrew/bin/ctags'
 
 "go highlight setting
@@ -287,3 +255,29 @@ set updatetime=100
 
 "nerdcommenter
 let g:NERDSpaceDelims = 1
+
+" display extra whitespaces
+" set list
+" set lcs=tab:>-,trail:-,nbsp:-
+
+"YouCompleteMe config
+"let mapleader = ','  "è¿™ä¸ªleaderå°±æ˜ å°„ä¸ºé€—å·â€œï¼Œâ€
+"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'   "é…ç½®é»˜è®¤çš„ycm_extra_conf.py
+""æŒ‰,d ä¼šè·³è½¬åˆ°å®šä¹‰
+"nnoremap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"let g:ycm_confirm_extra_conf=0    "æ‰“å¼€vimæ—¶ä¸å†è¯¢é—®æ˜¯å¦åŠ è½½ycm_extra_conf.pyé…ç½®
+"let g:ycm_collect_identifiers_from_tag_files = 1 "ä½¿ç”¨ctagsç”Ÿæˆçš„tagsæ–‡ä»¶
+
+""syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 1
+"let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+"let g:syntastic_python_python_exec = 'python3'
+"let g:syntastic_python_checkers = ['pylint']
+"let g:syntastic_python_pylint_args = '-E'
+
